@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div>
+        <!-- text-center căn lề giữa 
+         bg-success: background màu xanh-->
+        <div class="text-center bg-success">
+            <h2 class="text-danger">Tôi muốn bỏ học</h2>
+            <!-- text-danger ở trên có nghĩa là cho chữ thành màu đỏ, nó tương ứng với color: red
+         các màu sắc cần nhớ:
+         danger: đỏ
+         success: xanh
+         warning: vàng
+         và 1 số màu khác như là primary, secondary, light, info
+         cách sử dụng: text-info, text-warning, text-success -->
+            <h2 class="text-primary">Tôi yêu thầy</h2>
+            <h2 class="text-warning">Tôi thích bơi here</h2>
+            <h2 class="text-light">Uy tín luôn</h2>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!-- kiến thức về form, fw-bold: lm cho chữ đậm lên -->
+            <form class="form">
+
+                <div class="d-flex mb-4">
+                    <label class="form-label fw-bold" style="margin-right: 2em;">Tên</label>
+                    <input type="text" class="form-control w-50 ms-4">
+                </div>
+                <div class="d-flex gap-4">
+                    <label class="form-label fw-bold" style="margin-right: 2em;">Tuổi</label>
+                    <input type="number" class="form-control w-50">
+                </div>
+                <div class="d-flex gap-4">
+                    <label class="form-label fw-bold" style="margin-right: 2em;">mày uống bao nhiêu</label>
+                    <select class="form-select w-50">
+                        <option>1 cốc</option>
+                        <option>10 cốc</option>
+                        <option>Bất tử</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-4" mb-4>
+                    <label class="form-label fw-bold" style="margin-right: 2em;">mày giới tình gì</label>
+                    <input type="radio" name="gioitinh" value="1">
+                    <label class="form-label fw-bold" style="margin-right: 2em;">nam</label>
+                    <input type="checkbox" name="gioitinh" value="2">
+                    <label class="form-check-label">Gái</label>
+
+                </div>
+                <div>
+                    <label class="form-label fw-bold" style="margin-right: 2em;">Thích ăn món gì</label>
+                    <input type="checkbox" name="monanuathich" value="1" />
+                    <label class="form-check-label">Đậu tẩm hành</label>
+                    <input type="checkbox" name="monanuathich" value="2" />
+                    <label class="form-check-label">Dải nướng</label>
+                    <!-- kiến thức về btn -->
+                    <button class="btn btn-danger" type="submit">Chốt, t đki</button>
+                    <button class="btn btn-warning" type="reset">Vợ chưa cho</button>
+                    <button class="btn btn-success" type="button">Đây là btn</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-6"></div>
+    </div>
+
+</body>
+
+</html>
