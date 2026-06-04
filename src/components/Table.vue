@@ -10,6 +10,16 @@ const props = defineProps({
         type: String
     }
 })
+// chúng ta đã học defineProps là bắn từ cha về con, bây giờ sẽ học defineEmits để bắn ngược lại
+// từ con -> cha
+const emits = defineEmits(["remove", "update"]) // dòng này tức là tạo 1 emits chứa 2 sự kiện đó là remove và sửa
+
+const xoa = (vitri) => {
+    if (confirm("Mày có chắc chắn muốn xoá món ăn thứ " + (vitri + 1) + " không ?")) {
+        emits("remove", { vitri }) // dòng này tức là thằng con bắn 1 sự kiện về phía cha,
+        // sự kiện có tên là remove, và đính kèm vị trí cần xoá tới thằng cha
+    }
+}
 </script>
 <template>
     <p class="text-danger">Đây là biến tạo ở props và truyền từ component cha, có nội
@@ -24,6 +34,7 @@ const props = defineProps({
                 <th :class="bien5">Uống bao nhiêu cốc</th> <!-- :class ở đây là binding class  -->
                 <th :style="bien6">Sex 🙅🙅🙅🙅</th> <!-- :style ở đây là binding style -->
                 <th>Món ưa thích</th>
+                <th>Hành động 🤦🏻‍♂️🤦🏻‍♂️🤦🏻‍♂️🤦🏻‍♂️</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +49,11 @@ const props = defineProps({
                 <td>{{ doituong.sex }}</td>
                 <!-- :src ở dưới tức là đang binding (ràng buộc) dữ liệu -->
                 <td><img :src=doituong.monan class="rounded" width="20%" heigh="20%" /> </td>
+                <td>
+                    <button class="btn btn-danger btn-outline-danger text-info" type="button" @click="xoa(vitri)">
+                        Xoá
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

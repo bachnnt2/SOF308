@@ -98,7 +98,7 @@ const dangky = () => {
         { ...doituong }
     )
     // sau khi thêm mới, reset lại cái form
-        doituong.id = Math.random,
+    doituong.id = Math.random,
         doituong.name = "",
         doituong.tuoi = 0,
         doituong.monan = "",
@@ -108,6 +108,11 @@ const dangky = () => {
 }
 // Kiến thức để lấy 5 điểm trong môn vue, đó là tạo Array chứa dữ liệu, sau đó 
 // xuất ra table
+
+const xoa = (vitri) => {
+    // bắt đầu xoá
+    listBeer.value.splice(vitri.vitri, 1)
+}
 </script>
 <!-- Mọi code html phải đặt ở trong cái thẻ template này thì 
  giao diện mới hiện ra -->
@@ -182,5 +187,6 @@ const dangky = () => {
     <!-- Chúng ta sẽ gọi Table.vue sau dòng này -->
     <!-- cái :listBeer tức là HelloWorld đang là component cha, gọi thằng Table là component
       con, và truyền vào biến listBeer tới biến listBeer đã định nghĩa ở trong component con -->
-    <Table :listBeer=listBeer :ten=bienten />
+    <!-- ở dưới đoạn @remove tức là thằng cha hứng cái sự kiện xoá từ thằng con -->
+    <Table :listBeer=listBeer :ten=bienten @remove="xoa" />
 </template>
