@@ -12,13 +12,18 @@ const props = defineProps({
 })
 // chúng ta đã học defineProps là bắn từ cha về con, bây giờ sẽ học defineEmits để bắn ngược lại
 // từ con -> cha
-const emits = defineEmits(["remove", "update"]) // dòng này tức là tạo 1 emits chứa 2 sự kiện đó là remove và sửa
+const emits = defineEmits(["remove", "update", "detail"]) // dòng này tức là tạo 1 emits chứa 2 sự kiện đó là remove và sửa
 
 const xoa = (vitri) => {
     if (confirm("Mày có chắc chắn muốn xoá món ăn thứ " + (vitri + 1) + " không ?")) {
         emits("remove", { vitri }) // dòng này tức là thằng con bắn 1 sự kiện về phía cha,
         // sự kiện có tên là remove, và đính kèm vị trí cần xoá tới thằng cha
     }
+}
+
+// cái hàm ở dưới, dùng để mỗi lần click vào 1 dòng -> truyền cái vị trí của dòng đó tới component cha
+const detail = (vitri) => {
+    emits("detail", { vitri })
 }
 </script>
 <template>
@@ -41,7 +46,7 @@ const xoa = (vitri) => {
             <!-- sau cái dòng lày, chúng ta sẽ sử dụng vòng lặp trong vue để xuất dữ niệu đầy màn hình -->
             <!-- dòng ở dưới nó na ná với for 
              (int vitri = 0; vitri < listBeer.leng - 1, vitri ++) -->
-            <tr v-for="(doituong, vitri) in listBeer" :key=doituong.id>
+            <tr v-for="(doituong, vitri) in listBeer" :key=doituong.id @click="detail(vitri)">
                 <td>{{ vitri + 1 }}</td>
                 <td>{{ doituong.name }}</td>
                 <td>{{ doituong.tuoi }}</td>

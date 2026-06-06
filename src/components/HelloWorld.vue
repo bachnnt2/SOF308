@@ -113,6 +113,31 @@ const xoa = (vitri) => {
     // bắt đầu xoá
     listBeer.value.splice(vitri.vitri, 1)
 }
+const isUpdate = ref(false) // ban đầu là chưa update, nên cái cờ này được đặt là false
+const xem = (vitri) => {
+    // từ cái vị trí thu được, tìm trong mảng và lôi nó ra
+    let doiTuongTimDuoc = { ...listBeer.value[vitri.vitri] }
+    // mỗi lần click xem, thì ta đổi cái cờ update thành true
+    isUpdate.value = true
+
+    doituong.id = doiTuongTimDuoc.id,
+        doituong.name = doiTuongTimDuoc.name,
+        doituong.tuoi = doiTuongTimDuoc.tuoi,
+        doituong.monan = doiTuongTimDuoc.monan,
+        doituong.coc = doiTuongTimDuoc.coc,
+        doituong.sex = doiTuongTimDuoc.sex
+}
+
+// mỗi lần reset form, thì tất các trường reset lại, bao gồm cả cái cờ update kia
+const resetForm = () => {
+    doituong.id = Math.random,
+        doituong.name = "",
+        doituong.tuoi = 0,
+        doituong.monan = "",
+        doituong.coc = 0,
+        doituong.sex = ""
+        isUpdate.value = false
+}
 </script>
 <!-- Mọi code html phải đặt ở trong cái thẻ template này thì 
  giao diện mới hiện ra -->
@@ -139,8 +164,7 @@ const xoa = (vitri) => {
     <div class="row">
         <div class="col-6">
             <!-- kiến thức về form, fw-bold: lm cho chữ đậm lên -->
-            <form class="form">
-
+            <form class="form" @reset="resetForm">
                 <div class="d-flex mb-4">
                     <label class="form-label fw-bold" style="margin-right: 2em;">Tên</label>
                     <!-- cái v-model ở dưới là kỹ thuật binding (ràng buộc) 2 chiều,
@@ -155,16 +179,19 @@ const xoa = (vitri) => {
                 <div class="d-flex gap-4">
                     <label class="form-label fw-bold" style="margin-right: 2em;">mày uống bao nhiêu</label>
                     <select class="form-select w-50" v-model="doituong.coc">
-                        <option>1 cốc</option>
-                        <option>10 cốc</option>
-                        <option>Bất tử</option>
+                        <option value="0">--- Mời chọn cốc ---</option>
+                        <option value="1">1 cốc</option>
+                        <option value="10">10 cốc</option>
+                        <option value="20">20 cốc</option>
+                        <option value="30">30 cốc</option>
+                        <option value="999">Bất tử</option>
                     </select>
                 </div>
                 <div class="d-flex gap-4" mb-4>
                     <label class="form-label fw-bold" style="margin-right: 2em;">mày giới tình gì</label>
-                    <input type="radio" name="gioitinh" value="Nam" v-model="doituong.sex">
+                    <input type="radio" name="gioitinh" value="nam" v-model="doituong.sex">
                     <label class="form-label fw-bold" style="margin-right: 2em;">nam</label>
-                    <input type="radio" name="gioitinh" value="Nữ" v-model="doituong.sex">
+                    <input type="radio" name="gioitinh" value="nữ" v-model="doituong.sex">
                     <label class="form-check-label">Gái</label>
 
                 </div>
@@ -173,7 +200,9 @@ const xoa = (vitri) => {
                     <input type="text" class="form-control w-50 ms-4" name="monanuathich" v-model="doituong.monan" />
                     <!-- kiến thức về btn -->
                 </div>
-                <button class="btn btn-danger" type="submit" @click.prevent="dangky()">Chốt, t đki</button>
+                <button :class='isUpdate ? "btn btn-danger" : "btn btn-success"' type="submit" @click.prevent="dangky()">
+                    {{ isUpdate ? "Tao sửa tí" : "Chốt, t đki" }}
+                </button>
                 <button class="btn btn-warning" type="reset">Vợ chưa cho</button>
                 <button class="btn btn-success" type="button">Đây là btn</button>
                 <button class="btn btn-success" type="button" @click="doimauxanh()">Đổi bien5 thành màu
@@ -188,5 +217,5 @@ const xoa = (vitri) => {
     <!-- cái :listBeer tức là HelloWorld đang là component cha, gọi thằng Table là component
       con, và truyền vào biến listBeer tới biến listBeer đã định nghĩa ở trong component con -->
     <!-- ở dưới đoạn @remove tức là thằng cha hứng cái sự kiện xoá từ thằng con -->
-    <Table :listBeer=listBeer :ten=bienten @remove="xoa" />
+    <Table :listBeer=listBeer :ten=bienten @remove="xoa" @detail="xem" />
 </template>
