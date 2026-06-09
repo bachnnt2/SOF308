@@ -93,17 +93,37 @@ const doimauvang = () => {
 const bienten = ref("Khủng long")
 
 const dangky = () => {
-    // sau khi click đăng ký, thì chúng ta sẽ thêm doituong vào list đang hiển thị dữ liệu ở bảng -> luồng 6,7 điểm thêm mới
-    listBeer.value.unshift(
-        { ...doituong }
-    )
-    // sau khi thêm mới, reset lại cái form
-    doituong.id = Math.random,
-        doituong.name = "",
-        doituong.tuoi = 0,
-        doituong.monan = "",
-        doituong.coc = 0,
-        doituong.sex = ""
+    // nếu là update thì update, ở dứoi phải có .value là bởi vì biến kiểu ref, muốn truy xuất phải dùng .value
+    // còn nếu biến kiểu reactive thì không cần .value. Trong cái môn này, anh em dùng ref hay reactive được hết
+    // cái nào anh em thích thì dùng
+    if (isUpdate.value) {
+        // bắt cái thằng có id trùng với id cần update
+        let doiTuongCanUpdate = listBeer.value.find(beer => beer.id === doituong.id)
+
+        // sau khi bắt được, chúng ta tiến hành update
+        doiTuongCanUpdate.name = doituong.name,
+            doiTuongCanUpdate.tuoi = doituong.tuoi,
+            doiTuongCanUpdate.monan = doituong.monan,
+            doiTuongCanUpdate.coc = doituong.coc,
+            doiTuongCanUpdate.sex = doituong.sex
+        //sau khi sửa xong, reset lại form cho chắc cú, đỡ bị update hoặc thêm mới trùng
+        resetForm()
+
+    }
+    // nếu không thì thêm mới
+    else {
+        // sau khi click đăng ký, thì chúng ta sẽ thêm doituong vào list đang hiển thị dữ liệu ở bảng -> luồng 6,7 điểm thêm mới
+        listBeer.value.unshift(
+            { ...doituong }
+        )
+        // sau khi thêm mới, reset lại cái form
+        doituong.id = Math.random,
+            doituong.name = "",
+            doituong.tuoi = 0,
+            doituong.monan = "",
+            doituong.coc = 0,
+            doituong.sex = ""
+    }
 
 }
 // Kiến thức để lấy 5 điểm trong môn vue, đó là tạo Array chứa dữ liệu, sau đó 
@@ -119,7 +139,6 @@ const xem = (vitri) => {
     let doiTuongTimDuoc = { ...listBeer.value[vitri.vitri] }
     // mỗi lần click xem, thì ta đổi cái cờ update thành true
     isUpdate.value = true
-
     doituong.id = doiTuongTimDuoc.id,
         doituong.name = doiTuongTimDuoc.name,
         doituong.tuoi = doiTuongTimDuoc.tuoi,
@@ -136,7 +155,7 @@ const resetForm = () => {
         doituong.monan = "",
         doituong.coc = 0,
         doituong.sex = ""
-        isUpdate.value = false
+    isUpdate.value = false
 }
 </script>
 <!-- Mọi code html phải đặt ở trong cái thẻ template này thì 
@@ -200,15 +219,12 @@ const resetForm = () => {
                     <input type="text" class="form-control w-50 ms-4" name="monanuathich" v-model="doituong.monan" />
                     <!-- kiến thức về btn -->
                 </div>
-                <button :class='isUpdate ? "btn btn-danger" : "btn btn-success"' type="submit" @click.prevent="dangky()">
+                <button :class='isUpdate ? "btn btn-danger" : "btn btn-success"' type="submit"
+                    @click.prevent="dangky()">
                     {{ isUpdate ? "Tao sửa tí" : "Chốt, t đki" }}
                 </button>
                 <button class="btn btn-warning" type="reset">Vợ chưa cho</button>
                 <button class="btn btn-success" type="button">Đây là btn</button>
-                <button class="btn btn-success" type="button" @click="doimauxanh()">Đổi bien5 thành màu
-                    xanh</button>
-                <button class="btn btn-success" type="button" v-on:click="doimauvang()">Đổi bien5 thành màu
-                    vàng</button>
             </form>
         </div>
         <div class="col-6"></div>
