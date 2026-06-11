@@ -43,7 +43,7 @@ const listBeer = ref(
         {
             id: 1,
             name: "Bách",
-            tuoi: 18,
+            tuoi: 4,
             monan: "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/mon_nhau_don_gian_21775cd4c5.png",
             coc: 20,
             sex: "nam"
@@ -51,7 +51,7 @@ const listBeer = ref(
         {
             id: 2,
             name: "Nam",
-            tuoi: 44,
+            tuoi: 12,
             monan: "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2024/9/25/cach-lam-dau-phu-tam-hanh-ngon-don-gian-tai-nha-4855.jpg?width=1200&s=FJsEs6saBgRmjqI6MLDbAQ",
             coc: 30,
             sex: "nam"
@@ -59,7 +59,7 @@ const listBeer = ref(
         {
             id: 3,
             name: "Chiến",
-            tuoi: 30,
+            tuoi: 25,
             monan: "https://imgs.vietnamnet.vn/Images/2017/10/09/16/20171009163405-long-ga-trung-non-chay-toi.jpg?width=0&s=mkDMCmLU5iKvuhsT-FdLwg",
             coc: 20,
             sex: "nữ"

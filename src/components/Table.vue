@@ -49,7 +49,25 @@ const detail = (vitri) => {
             <tr v-for="(doituong, vitri) in listBeer" :key=doituong.id @click="detail(vitri)">
                 <td>{{ vitri + 1 }}</td>
                 <td>{{ doituong.name }}</td>
-                <td>{{ doituong.tuoi }}</td>
+                <td>
+                    <!-- dưới đây là kiến thức về if-else, khi đi thi có thể 
+                     sẽ có bài về hiển thị 1 cái ô dữ liệu nào đó theo điều kiện bất kỳ
+                     và đây là kiến thức thêm để lấy 10đ, chứ không liên quan tới luồng
+                     CRUD bình thường. Ngoài ra, còn 1 thuộc tính nữa v-show, nó cũng 
+                     xử lý hiển thị nhưng khác v-if ở chỗ đó là thành phần được hiển thị
+                     chỉ bị ẩn đi chứ không mất hẳn như v-if. Mọi người có thể tìm hiểu
+                     thêm về v-show (cơ chế hoạt động của v-show đó là display: none) -->
+                    <p v-if="doituong.tuoi < 5">
+                        Trẻ con có tuổi là
+                    </p>
+                    <p v-else-if="doituong.tuoi > 5 && doituong.tuoi <= 18">
+                        Thanh niên có tuổi là
+                    </p>
+                    <p v-else>
+                        Đây là người lớn có tuổi là
+                    </p>
+                    {{ doituong.tuoi }}
+                </td>
                 <td>{{ doituong.coc }}</td>
                 <td>{{ doituong.sex }}</td>
                 <!-- :src ở dưới tức là đang binding (ràng buộc) dữ liệu -->
